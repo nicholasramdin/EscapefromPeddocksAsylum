@@ -1,19 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 5f; // Declares the speed variable with a public access modifier and initializes it with a value of 5.
+    private Animator animator;
     private Vector3 targetPosition;
-    private bool isMoving = false;
-
-    private Animator animator; // Reference to the Animator component
+    public float speed = 5.0f;  // Adjust speed as needed.
 
     void Start()
     {
-        // Cache the Animator component at start.
         animator = GetComponent<Animator>();
+        // Initialize target position at start to prevent unintentional movement
+        targetPosition = transform.position;
     }
 
     void Update()
@@ -23,38 +20,48 @@ public class PlayerMovement : MonoBehaviour
             SetTargetPosition();
         }
 
-        if (isMoving)
-        {
-            MovePlayer();
-        }
+        MovePlayer();
     }
 
     void SetTargetPosition()
     {
+        // Get the position from the mouse click and set the z-coordinate to the player's current z-coordinate
         targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        targetPosition.z = transform.position.z; // Keep player at the same z-depth.
-        isMoving = true;
+        targetPosition.z = transform.position.z;
     }
 
     void MovePlayer()
     {
-        // Calculate the direction vector without the Y axis.
-        Vector2 direction = (targetPosition - transform.position).normalized;
-
-        // Set the moveX and moveY parameters based on the direction to the target position.
-        animator.SetFloat("moveX", direction.x);
-        animator.SetFloat("moveY", direction.y);
-
-        // Move the player towards the target position.
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
-
-        // Check if the player has reached close enough to the target position and stop moving if so.
-        if (Vector3.Distance(transform.position, targetPosition) < 0.1f) // A small threshold to stop the movement.
+        // Move the player towards the target position only if the distance is significant
+        if (Vector3.Distance(transform.position, targetPosition) > 0.1f)
         {
-            // Stop moving and reset moveX and moveY to 0 because the player has stopped.
-            isMoving = false;
-            animator.SetFloat("moveX", 0);
-            animator.SetFloat("moveY", 0);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+            UpdateWalkingAnimations(true);
+        }
+        else
+        {
+            UpdateWalkingAnimations(false);
+        }
+    }
+
+    void UpdateWalkingAnimations(bool isMoving)
+    {
+        // Update animation parameters based on the direction of movement
+        if (isMoving)
+        {
+            animator.SetBool("isWalkingLeft", targetPosition.x < transform.position.x);
+            animator.SetBool("isWalkingRight", targetPosition.x > transform.position.x);
+            animator.SetBool("isWalkingUp", targetPosition.y > transform.position.y);
+            animator.SetBool("isWalkingDown", targetPosition.y < transform.position.y);
+        }
+        else
+        {
+            // Reset all walking animations when the destination is reached or if not moving
+            animator.SetBool("isWalkingLeft", false);
+            animator.SetBool("isWalkingRight", false);
+            animator.SetBool("isWalkingUp", false);
+            animator.SetBool("isWalkingDown", false);
         }
     }
 }
+
