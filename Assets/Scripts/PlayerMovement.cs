@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private Vector3 targetPosition;
     public float speed = 5.0f;  // Adjust speed as needed.
+    public LayerMask collisionLayer;  // Define which layers constitute obstacles.
 
     void Start()
     {
@@ -25,18 +26,33 @@ public class PlayerMovement : MonoBehaviour
 
     void SetTargetPosition()
     {
-        // Get the position from the mouse click and set the z-coordinate to the player's current z-coordinate
-        targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        targetPosition.z = transform.position.z;
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        targetPosition = new Vector3(mousePos.x, mousePos.y, transform.position.z);
     }
 
     void MovePlayer()
     {
-        // Move the player towards the target position only if the distance is significant
-        if (Vector3.Distance(transform.position, targetPosition) > 0.1f)
+        Vector3 direction = (targetPosition - transform.position).normalized;
+        float distance = Vector3.Distance(transform.position, targetPosition);
+
+        if (distance > 0.1f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
-            UpdateWalkingAnimations(true);
+            // Check if the path to the target position is clear using raycasting
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(direction.x, direction.y), distance, collisionLayer);
+            Debug.Log("Raycast hit: " + hit.collider);
+
+            if (hit.collider == null)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+                UpdateWalkingAnimations(true);
+            }
+            else
+            {
+                // Stop movement when hitting an obstacle, adjust the position to be slightly before the hit point
+                Vector3 hitPoint = new Vector3(hit.point.x, hit.point.y, transform.position.z);
+                transform.position = Vector3.MoveTowards(transform.position, hitPoint - (direction * 0.05f), speed * Time.deltaTime);
+                UpdateWalkingAnimations(false);
+            }
         }
         else
         {
@@ -46,7 +62,6 @@ public class PlayerMovement : MonoBehaviour
 
     void UpdateWalkingAnimations(bool isMoving)
     {
-        // Update animation parameters based on the direction of movement
         if (isMoving)
         {
             animator.SetBool("isWalkingLeft", targetPosition.x < transform.position.x);
@@ -56,7 +71,6 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            // Reset all walking animations when the destination is reached or if not moving
             animator.SetBool("isWalkingLeft", false);
             animator.SetBool("isWalkingRight", false);
             animator.SetBool("isWalkingUp", false);
@@ -64,4 +78,3 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 }
-
