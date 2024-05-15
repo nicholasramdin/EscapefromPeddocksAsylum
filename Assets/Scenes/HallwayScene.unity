@@ -681,8 +681,8 @@ Transform:
   m_GameObject: {fileID: 487839864}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.25664425, w: 0.96650594}
-  m_LocalPosition: {x: 0.61, y: -1.93, z: 0}
-  m_LocalScale: {x: 2.3456926, y: 0.7129165, z: 1}
+  m_LocalPosition: {x: 0.66, y: -1.83, z: 0}
+  m_LocalScale: {x: 2.6912131, y: 0.7129165, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 35388074}
@@ -1498,7 +1498,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.4793086, w: 0.8776465}
   m_LocalPosition: {x: 2.09, y: -0.98, z: 0}
-  m_LocalScale: {x: 0.88609, y: 1.0250753, z: 1}
+  m_LocalScale: {x: 0.50678146, y: 1.1565741, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 35388074}
@@ -1652,7 +1652,7 @@ GameObject:
   - component: {fileID: 1269626225}
   - component: {fileID: 1269626224}
   m_Layer: 5
-  m_Name: OpenCellDoorPrompt
+  m_Name: OpenTombDoorPrompt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1697,7 +1697,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press E to unlock the cell door
+  m_text: Press E to unlock the door
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
@@ -2420,6 +2420,50 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &1649258485
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1649258487}
+  - component: {fileID: 1649258486}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1649258486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649258485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dc45e1da7988cc429d495dffb5d450a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1649258487
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649258485}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5344739, y: 0.3894962, z: 6.336401}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1670226045
 GameObject:
   m_ObjectHideFlags: 0
@@ -2641,6 +2685,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1723408609}
   - component: {fileID: 1723408610}
+  - component: {fileID: 1723408611}
   m_Layer: 6
   m_Name: DoortoTomb
   m_TagString: Untagged
@@ -2657,8 +2702,8 @@ Transform:
   m_GameObject: {fileID: 1723408608}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.63, y: -0.54, z: 0}
-  m_LocalScale: {x: 0.5165625, y: 1.5, z: 1}
+  m_LocalPosition: {x: -3.63, y: -0.68, z: 0}
+  m_LocalScale: {x: 0.6650742, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 35388074}
@@ -2692,7 +2737,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -2708,6 +2753,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1723408611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723408608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90897cdf44a13fa4f948d3ce1167d9d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionPrompt: {fileID: 1269626222}
+  nextSceneName: DemonTombScene
 --- !u!1 &1863423758
 GameObject:
   m_ObjectHideFlags: 0
@@ -2916,7 +2975,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.78, y: -0.74}
+  m_AnchoredPosition: {x: 0.29, y: 0.15}
   m_SizeDelta: {x: 1.25, y: 1.875}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1968730614
@@ -3176,8 +3235,8 @@ Transform:
   m_GameObject: {fileID: 2080446225}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.29476336, w: 0.9555703}
-  m_LocalPosition: {x: -1.26, y: -1.93, z: 0}
-  m_LocalScale: {x: 2.3456926, y: 0.725309, z: 1}
+  m_LocalPosition: {x: -1.3, y: -1.88, z: 0}
+  m_LocalScale: {x: 2.7188926, y: 0.725309, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 35388074}
@@ -3239,3 +3298,4 @@ SceneRoots:
   - {fileID: 866061506}
   - {fileID: 150109228}
   - {fileID: 35388074}
+  - {fileID: 1649258487}
