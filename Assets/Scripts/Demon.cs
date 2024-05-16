@@ -1,10 +1,25 @@
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Demon : MonoBehaviour
 {
     public GameObject uiPanel;  // Assign the UI panel that contains the Demon text
     public GameObject promptText;  // Assign the UI text element for the interaction prompt
+    public Button attackButton;  // Assign the UI button for attacking the demon
     private bool isPlayerNear = false;  // To check if player is near the Demon
+    private bool hasTalkedToDemon = false;  // To check if the player has talked to the demon
+
+    void Start()
+    {
+        // Initially deactivate all UI elements
+        promptText.SetActive(false);
+        uiPanel.SetActive(false);
+        attackButton.gameObject.SetActive(false);
+
+        // Add listener to the attack button
+        attackButton.onClick.AddListener(OnAttackButtonClick);
+    }
 
     void Update()
     {
@@ -12,6 +27,13 @@ public class Demon : MonoBehaviour
         {
             ToggleUIPanel();  // Toggle the visibility of the UI panel
             promptText.SetActive(false);  // Optionally hide prompt when UI panel is active
+
+            // If the player talks to the demon, show the attack button
+            if (!hasTalkedToDemon)
+            {
+                hasTalkedToDemon = true;
+                attackButton.gameObject.SetActive(true);  // Show the attack button
+            }
         }
     }
 
@@ -38,5 +60,11 @@ public class Demon : MonoBehaviour
     {
         // Toggle the active state of the panel
         uiPanel.SetActive(!uiPanel.activeSelf);
+    }
+
+    private void OnAttackButtonClick()
+    {
+        // Load the GameOverFromHellScene when the attack button is clicked
+        SceneManager.LoadScene("GameOverFromHellScene");
     }
 }
