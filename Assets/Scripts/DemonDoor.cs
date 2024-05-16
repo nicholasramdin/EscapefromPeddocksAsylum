@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement; // Import SceneManagement to handle scene loading
-using System.Collections; // Import System.Collections to use IEnumerator and Coroutines
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class DemonDoor : MonoBehaviour
 {
@@ -10,11 +10,14 @@ public class DemonDoor : MonoBehaviour
     public Button openButton;  // Assign the UI button for opening the door
     public Button leaveButton;  // Assign the UI button for leaving
     public Animator demonAnimator;  // Assign the Animator for the demon animation
+    public CameraShake cameraShake;  // Reference to the CameraShake script
 
     private bool isPlayerNear = false;  // To check if the player is near the demon door
 
     // Set the duration to wait for the animation to finish (in seconds)
     public float animationWaitDuration = 4.0f;
+    public float shakeDuration = 0.5f;  // Duration of the camera shake
+    public float shakeMagnitude = 0.1f;  // Magnitude of the camera shake
 
     void Start()
     {
@@ -83,9 +86,8 @@ public class DemonDoor : MonoBehaviour
 
     private void LeaveDoor()
     {
-        // Logic for leaving the door
-        Debug.Log("Leaving the door...");
-        // Add your camera shake and game over logic here
+        // Trigger camera shake and then transition to game over
+        StartCoroutine(ShakeAndLoadScene());
     }
 
     // Coroutine to wait for the specified duration
@@ -93,6 +95,19 @@ public class DemonDoor : MonoBehaviour
     {
         // Wait for the specified duration
         yield return new WaitForSeconds(waitTime);
+
+        // Load the game over scene
+        SceneManager.LoadScene("GameOverScene");
+    }
+
+    // Coroutine to shake the camera and then transition to the game over scene
+    private IEnumerator ShakeAndLoadScene()
+    {
+        // Trigger camera shake
+        StartCoroutine(cameraShake.Shake(shakeDuration, shakeMagnitude));
+
+        // Wait for the shake duration to finish
+        yield return new WaitForSeconds(shakeDuration);
 
         // Load the game over scene
         SceneManager.LoadScene("GameOverScene");

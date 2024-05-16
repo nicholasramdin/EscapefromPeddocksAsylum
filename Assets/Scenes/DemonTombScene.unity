@@ -370,6 +370,10 @@ MonoBehaviour:
   openButton: {fileID: 1694519606}
   leaveButton: {fileID: 1890301508}
   demonAnimator: {fileID: 2132930826}
+  cameraShake: {fileID: 2000708680}
+  animationWaitDuration: 4
+  shakeDuration: 0.5
+  shakeMagnitude: 0.1
 --- !u!1 &65795007
 GameObject:
   m_ObjectHideFlags: 0
@@ -3679,6 +3683,7 @@ GameObject:
   - component: {fileID: 2000708679}
   - component: {fileID: 2000708678}
   - component: {fileID: 2000708677}
+  - component: {fileID: 2000708680}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3760,6 +3765,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2000708680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000708676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6938d9bcdffe17f40b9a4b6155856864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2029193743
 GameObject:
   m_ObjectHideFlags: 0
