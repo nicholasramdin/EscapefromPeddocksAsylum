@@ -7,6 +7,7 @@ public class DemonDoor : MonoBehaviour
     public GameObject promptText;  // Assign the UI text element for the interaction prompt
     public Button openButton;  // Assign the UI button for opening the door
     public Button leaveButton;  // Assign the UI button for leaving
+    public Animator demonAnimator;  // Assign the Animator for the demon animation
 
     private bool isPlayerNear = false;  // To check if the player is near the demon door
 
@@ -68,9 +69,12 @@ public class DemonDoor : MonoBehaviour
 
     private void OpenDoor()
     {
+        // Trigger demon animation
+        demonAnimator.SetTrigger("Appear");
+
         // Logic for opening the door
         Debug.Log("Opening the door...");
-        // Add your animation and game over logic here
+        // Add your game over logic here
     }
 
     private void LeaveDoor()

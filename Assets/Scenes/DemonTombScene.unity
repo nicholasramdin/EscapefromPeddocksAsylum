@@ -369,6 +369,7 @@ MonoBehaviour:
   promptText: {fileID: 1479303857}
   openButton: {fileID: 1694519606}
   leaveButton: {fileID: 1890301508}
+  demonAnimator: {fileID: 2132930826}
 --- !u!1 &65795007
 GameObject:
   m_ObjectHideFlags: 0
