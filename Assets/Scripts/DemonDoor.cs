@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement; // Import SceneManagement to handle scene loading
+using System.Collections; // Import System.Collections to use IEnumerator and Coroutines
 
 public class DemonDoor : MonoBehaviour
 {
@@ -10,6 +12,9 @@ public class DemonDoor : MonoBehaviour
     public Animator demonAnimator;  // Assign the Animator for the demon animation
 
     private bool isPlayerNear = false;  // To check if the player is near the demon door
+
+    // Set the duration to wait for the animation to finish (in seconds)
+    public float animationWaitDuration = 4.0f;
 
     void Start()
     {
@@ -72,9 +77,8 @@ public class DemonDoor : MonoBehaviour
         // Trigger demon animation
         demonAnimator.SetTrigger("Appear");
 
-        // Logic for opening the door
-        Debug.Log("Opening the door...");
-        // Add your game over logic here
+        // Start coroutine to wait for the animation to finish
+        StartCoroutine(WaitForAnimation(animationWaitDuration));
     }
 
     private void LeaveDoor()
@@ -82,5 +86,15 @@ public class DemonDoor : MonoBehaviour
         // Logic for leaving the door
         Debug.Log("Leaving the door...");
         // Add your camera shake and game over logic here
+    }
+
+    // Coroutine to wait for the specified duration
+    private IEnumerator WaitForAnimation(float waitTime)
+    {
+        // Wait for the specified duration
+        yield return new WaitForSeconds(waitTime);
+
+        // Load the game over scene
+        SceneManager.LoadScene("GameOverScene");
     }
 }
