@@ -110,6 +110,6 @@ public class DemonDoor : MonoBehaviour
         yield return new WaitForSeconds(shakeDuration);
 
         // Load the game over scene
-        SceneManager.LoadScene("GameOverScene");
+        SceneManager.LoadScene("HellScene");
     }
 }

@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/DemonTombScene.unity
     guid: 92a5dd2add456f2498a34dc7bebcd04e
   - enabled: 1
+    path: Assets/Scenes/HellScene.unity
+    guid: bbf97d831a26cda49a5f2ce92f6f082d
+  - enabled: 1
     path: Assets/Scenes/GameOverScene.unity
     guid: 29a0726e1ab1e364d8e90450644f9626
   m_configObjects: {}
